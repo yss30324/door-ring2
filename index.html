@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telegram Bot Trigger</title>
+</head>
+<body>
+  <h1>電鈴通知</h1>
+  <button id="send-notification">按下按鈕發送 Telegram 通知</button>
+
+  <script>
+    document.getElementById('send-notification').addEventListener('click', () => {
+      const botToken = '7686436169:AAG-wCW...T3eTCI';  // 你的 Bot Token
+      const chatId = '6643736515';  // 你的 Telegram Chat ID
+      const message = '有人按了電鈴！🚪🔔';
+
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.ok) {
+            alert('通知已發送到 Telegram！');
+          } else {
+            console.error('發送失敗', data);
+            alert('發送失敗，請檢查設定。');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('無法連線到 Telegram API。');
+        });
+    });
+  </script>
+</body>
+</html>
