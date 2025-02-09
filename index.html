@@ -7,13 +7,24 @@
 </head>
 <body>
   <h1>電鈴通知</h1>
-  <button id="send-notification">按下按鈕發送 Telegram 通知</button>
+
+  <form id="notification-form">
+    <label for="name">你是誰</label><br>
+    <input type="text" id="name" name="name" placeholder="請輸入你的名字" required><br><br>
+
+    <label for="message">留言（選填）</label><br>
+    <textarea id="message" name="message" placeholder="請輸入留言（可選）" rows="4"></textarea><br><br>
+
+    <button type="button" id="send-notification">按下按鈕發送 Telegram 通知</button>
+  </form>
 
   <script>
     document.getElementById('send-notification').addEventListener('click', () => {
-      const botToken = '7686436169:AAG-wCwN-Vf6-7rZs9a1nfvLRmtQqb3eTCI';  // 你的 Bot Token
-      const chatId = '6643736515';  // 你的 Telegram Chat ID
-      const message = '有人按了電鈴！🚪🔔';
+      const botToken = '7686436169:YOUR_TELEGRAM_BOT_TOKEN';  // 替換成你的 Bot Token
+      const chatId = '6643736515';  // 替換成你的 Telegram Chat ID
+      const name = document.getElementById('name').value.trim() || '某人';
+      const userMessage = document.getElementById('message').value.trim();
+      const message = `${name}按了電鈴！🚪🔔 ${userMessage}`;
 
       fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
         .then(response => response.json())
