@@ -34,6 +34,11 @@
       font-size: 16px;
       cursor: pointer;
     }
+    .note {
+      font-size: 14px;
+      color: gray;
+      margin-top: -10px;
+    }
   </style>
 </head>
 <body>
@@ -46,13 +51,14 @@
     <label for="message">留言（選填）</label>
     <textarea id="message" name="message" placeholder="請輸入留言（可選）" rows="4"></textarea>
 
-    <button type="button" id="send-notification">按下按鈕發送 Telegram 通知</button>
+    <button type="button" id="send-notification">叮咚</button>
+    <p class="note">可能會有延遲，請稍等</p>
   </form>
 
   <script>
     document.getElementById('send-notification').addEventListener('click', () => {
       const botToken = '7686436169:AAG-wCwN-Vf6-7rZs9a1nfvLRmtQqb3eTCI';  // 替換成你的 Bot Token
-      const chatId = '-4638205542';  // 替換成你的 Telegram Chat ID
+      const chatId = '6643736515';  // 替換成你的 Telegram Chat ID
       const name = document.getElementById('name').value.trim() || '某人';
       const userMessage = document.getElementById('message').value.trim();
       const message = `${name}按了電鈴！🚪🔔 ${userMessage}`;
